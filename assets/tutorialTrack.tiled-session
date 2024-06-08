@@ -21,11 +21,12 @@
     "openFiles": [
     ],
     "project": "tutorialTrack.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {
-        "height": 128,
-        "width": 128
+        "height": 32,
+        "width": 32
     }
 }
