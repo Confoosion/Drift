@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="10">
  <editorsettings>
   <export target="tutorialTrack.tmj" format="json"/>
  </editorsettings>
@@ -294,6 +294,10 @@
    </properties>
   </tile>
  </tileset>
+ <objectgroup id="5" name="Checkpoints">
+  <object id="7" name="lap_checkpoint" gid="4513" x="162.363" y="512" width="189.637" height="32"/>
+  <object id="8" name="checkpoint" gid="329" x="923.627" y="498.621" width="192.55" height="5.24159"/>
+ </objectgroup>
  <layer id="2" name="backgroundLayer" width="40" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

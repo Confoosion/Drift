@@ -3,6 +3,41 @@
  "infinite":false,
  "layers":[
         {
+         "draworder":"topdown",
+         "id":5,
+         "name":"Checkpoints",
+         "objects":[
+                {
+                 "gid":4513,
+                 "height":32,
+                 "id":7,
+                 "name":"lap_checkpoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":189.637102795984,
+                 "x":162.362897204016,
+                 "y":512
+                }, 
+                {
+                 "gid":329,
+                 "height":5.24159021406729,
+                 "id":8,
+                 "name":"checkpoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":192.550458715596,
+                 "x":923.626911314985,
+                 "y":498.620795107034
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -125,8 +160,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":1,
+ "nextlayerid":6,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

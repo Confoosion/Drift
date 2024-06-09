@@ -3,6 +3,8 @@ class Game extends Phaser.Scene {
         super("Drift");
 
         this.velocity = 0;
+        this.checkpointsHit = 0;
+        this.lap = 1;
     }
 
     init() {
@@ -21,6 +23,20 @@ class Game extends Phaser.Scene {
         this.wall = this.map.addTilesetImage("wallTileset", "track_tiles");
 
         this.backgroundLayer = this.map.createLayer("backgroundLayer", this.tileset, 0, this.TILEHEIGHTOFFSET);
+
+        this.checkpoints = this.map.createFromObjects("Checkpoints", {
+            name: "checkpoint",
+            key: "Checkpoints",
+        });
+        this.physics.world.enable(this.checkpoints, Phaser.Physics.Arcade.STATIC_BODY);
+        this.checkpointGroup = this.add.group(this.checkpoints);
+
+        this.finishLine = this.map.createFromObjects("Checkpoints", {
+            name: "lap_checkpoint",
+            key: "Checkpoints",
+        });
+        this.physics.world.enable(this.finishLine, Phaser.Physics.Arcade.STATIC_BODY);
+
         this.trackLayer = this.map.createLayer("trackLayer", this.tileset, 0, this.TILEHEIGHTOFFSET);
         this.wallLayer = this.map.createLayer("wallLayer", this.wall, 0, 0);
         this.wallLayer.setCollisionByProperty({
@@ -32,6 +48,23 @@ class Game extends Phaser.Scene {
         my.sprite.player.body.setCircle(radius, 4, radius);
 
         this.physics.add.collider(my.sprite.player, this.wallLayer);
+
+        this.physics.add.overlap(my.sprite.player, this.checkpointGroup, (obj1, obj2) => {
+            if(this.checkpointsHit == 0)
+            {
+                this.checkpointsHit += 1;
+                console.log("Checkpoint " + this.checkpointsHit + " hit");
+            }
+        });
+        this.physics.add.overlap(my.sprite.player, this.finishLine, (obj1, obj2) => {
+            if(this.checkpointsHit == 1)
+            {
+                this.checkpointsHit = 0;
+                this.lap++;
+                console.log("Lap: " + this.lap);
+            }
+        });
+
 
         cursors = this.input.keyboard.createCursorKeys();
     }
