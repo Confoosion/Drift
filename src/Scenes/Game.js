@@ -1,6 +1,6 @@
 class Game extends Phaser.Scene {
     constructor() {
-        super("Drift");
+        super("Drift_Tutorial");
 
         this.velocity = 0;
         this.checkpointsHit = 0;
@@ -96,11 +96,7 @@ class Game extends Phaser.Scene {
             my.sprite.player.body.angularVelocity = 0;
         } 
 
-        // my.sprite.player.angle = my.sprite.player.body.angularVelocity;
         my.sprite.player.body.velocity.x = this.velocity * Math.cos((my.sprite.player.angle-90)*0.01745);
         my.sprite.player.body.velocity.y = this.velocity * Math.sin((my.sprite.player.angle-90)*0.01745);
-        // this.physics.velocityFromRotation(my.sprite.player.rotation, this.velocity, my.sprite.player.body.velocity);
-        // this.car1.body.velocity.x = this.velocity * Math.cos((this.car1.angle-90)*0.01745);
-        // this.car1.body.velocity.y = this.velocity * Math.sin((this.car1.angle-90)*0.01745);
     }
 }
