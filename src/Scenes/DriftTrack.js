@@ -1,6 +1,6 @@
-class Game extends Phaser.Scene {
+class DriftTrack extends Phaser.Scene {
     constructor() {
-        super("Drift_Tutorial");
+        super("DriftTrack");
 
         this.velocity = 0;
         this.checkpointsHit = 0;
@@ -19,12 +19,12 @@ class Game extends Phaser.Scene {
 
     create()
     {
-        this.map = this.add.tilemap("tutorial_track", this.TILESIZE, this.TILESIZE, this.TILEHEIGHT, this.TILEWIDTH);
+        this.map = this.add.tilemap("track1", this.TILESIZE, this.TILESIZE, this.TILEHEIGHT, this.TILEWIDTH);
 
         this.tileset = this.map.addTilesetImage("trackTileset", "track_tiles");
         this.wall = this.map.addTilesetImage("wallTileset", "track_tiles");
 
-        this.backgroundLayer = this.map.createLayer("backgroundLayer", this.tileset, 0, this.TILEHEIGHTOFFSET);
+        this.backgroundLayer = this.map.createLayer("backgroundLayer", this.wall, 0, 0);
 
         this.checkpoints = this.map.createFromObjects("Checkpoints", {
             name: "checkpoint",
@@ -40,29 +40,40 @@ class Game extends Phaser.Scene {
         this.physics.world.enable(this.finishLine, Phaser.Physics.Arcade.STATIC_BODY);
 
         this.trackLayer = this.map.createLayer("trackLayer", this.tileset, 0, this.TILEHEIGHTOFFSET);
+
+        this.speedBoosts = this.map.createFromObjects("SpeedBoosts", {
+            name: "speedBooster",
+            key: "SpeedBoosts",
+            frame: 252
+        });
+        this.physics.world.enable(this.speedBoosts, Phaser.Physics.Arcade.STATIC_BODY);
+        this.speedBoostGroup = this.add.group(this.speedBoosts);
+
         this.wallLayer = this.map.createLayer("wallLayer", this.wall, 0, 0);
         this.wallLayer.setCollisionByProperty({
             collides: true
         });
 
-        my.sprite.player = this.physics.add.sprite(265, 600, "yellowCar").setScale(0.75); 
+        my.sprite.player = this.physics.add.sprite(223, 490, "yellowCar").setScale(0.75); 
         const radius = my.sprite.player.height * 0.25;
         my.sprite.player.body.setCircle(radius, 4, radius);
 
-        this.lapText = this.add.text(1000, 50, "Lap 1/4", { fontSize: '52px', fill: '#EE0' });
-        this.tutorialText = this.add.text(100, 70, "Use the arrow keys to drive.\nComplete 4 laps to complete the tutorial!", { fontSize: "36px", fill: '#FFF'});
+        this.lapText = this.add.text(1200, -450, "Lap 1/4", { fontSize: '52px', fill: '#EE0' });
+        this.lapText.setScrollFactor(0);
+        // this.tutorialText = this.add.text(100, 70, "Use the arrow keys to drive.\nComplete 4 laps to complete the tutorial!", { fontSize: "36px", fill: '#FFF'});
 
         this.physics.add.collider(my.sprite.player, this.wallLayer);
 
         this.physics.add.overlap(my.sprite.player, this.checkpointGroup, (obj1, obj2) => {
-            if(this.checkpointsHit == 0)
+            if(!obj2.hit)
             {
+                obj2.hit = true;
                 this.checkpointsHit += 1;
                 console.log("Checkpoint " + this.checkpointsHit + " hit");
             }
         });
         this.physics.add.overlap(my.sprite.player, this.finishLine, (obj1, obj2) => {
-            if(this.checkpointsHit == 1)
+            if(this.checkpointsHit == 10)
             {
                 if(this.lap == 4)
                 {
@@ -73,12 +84,26 @@ class Game extends Phaser.Scene {
                     this.checkpointsHit = 0;
                     this.lap++;
                     this.lapText.setText("Lap " + this.lap + "/4");
+                    this.checkpointGroup.getChildren().forEach(function(check) {
+                        check.hit = false;
+                    }, this);
                 }
             }
         });
 
+        this.physics.add.overlap(my.sprite.player, this.speedBoostGroup, (obj1, obj2) => {
+            if(this.velocity <= 750)
+            {
+                this.velocity += 35;
+                console.log(this.velocity);
+            }
+        });
+
         cursors = this.input.keyboard.createCursorKeys();
-        // this.cameras.main.setZoom(0.);
+
+        this.cameras.main.setBounds(0, 0, 0, this.map.heightInPixels + 300);
+        this.cameras.main.startFollow(my.sprite.player, true);
+        this.cameras.main.setZoom(0.5);
     }
 
     update()
@@ -87,7 +112,7 @@ class Game extends Phaser.Scene {
         {
             this.velocity+=7;
         }
-        else 
+        else
         {
             if (this.velocity >= 7)
             {

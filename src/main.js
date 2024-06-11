@@ -14,9 +14,9 @@ let config = {
             }
         }
     },
-    width: 1280,
+    width: 2200,
     height: 960,
-    scene: [Load, Game]
+    scene: [Load, Game, DriftTrack]
 }
 
 var cursors;

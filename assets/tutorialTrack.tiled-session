@@ -6,9 +6,41 @@
     "activeFile": "",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 0.5477
+            "scaleInDock": 0.5047
+        },
+        "level1Track.tmx": {
+            "scale": 0.39,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 679.4871794871794,
+                "y": 598.7179487179487
+            }
+        },
+        "level1Track.tmx#trackTileset": {
+            "scaleInDock": 0.3148
+        },
+        "level1Track.tmx#wallTileset": {
+            "scaleInDock": 0.4739
+        },
+        "tutorialTrack.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 0.52,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 630.7692307692307,
+                "y": 552.8846153846154
+            }
+        },
+        "tutorialTrack.tmx#trackTileset": {
+            "scaleInDock": 0.2441
+        },
+        "tutorialTrack.tmx#wallTileset": {
+            "scaleInDock": 0.5601
         }
     },
     "last.exportedFilePath": "/Users/jsales/CMPM120/RacingGame_Drift/assets",
@@ -27,6 +59,6 @@
     "tileset.embedInMap": true,
     "tileset.tileSize": {
         "height": 32,
-        "width": 32
+        "width": 64
     }
 }
