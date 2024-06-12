@@ -14,15 +14,38 @@ class StartMenu extends Phaser.Scene {
         let my = this.my;
         my.background = this.add.image(600,500, "background");
 
-        // Add start game option this.add.text(380, 400, 'Press "S" to Start', { fontSize: '40px', fill: '#ECBB12', fontFamily: 'fantasy'}).setOrigin(0.5);
-        const startGameText = this.add.text(600, 440, 'Tutorial', {
-            fontSize: '50px',
+        // single-player
+        const singlePlayerText = this.add.text(300, 430, 'single-player', {
+            fontSize: '45px',
             fill: '#ffffff',
             fontFamily: 'fantasy'
         }).setOrigin(0.5);
-        startGameText.setInteractive();
-        startGameText.on('pointerdown', () => {
+        singlePlayerText.setInteractive();
+        singlePlayerText.on('pointerdown', () => {
             this.scene.start('DriftTrack');
         });
+
+        // multiplayer 
+        const multiplayerText = this.add.text(900, 430, 'multiplayer', {
+            fontSize: '45px',
+            fill: '#ffffff',
+            fontFamily: 'fantasy'
+        }).setOrigin(0.5);
+        multiplayerText.setInteractive();
+        multiplayerText.on('pointerdown', () => {
+            this.scene.start('DriftTrack');
+        });
+
+        // tutorial?
+        const tutorialText = this.add.text(600, 430, 'tutorial', {
+            fontSize: '45px',
+            fill: '#ffffff',
+            fontFamily: 'fantasy'
+        }).setOrigin(0.5);
+        tutorialText.setInteractive();
+        tutorialText.on('pointerdown', () => {
+            this.scene.start('Drift_Tutorial');
+        });
+
    }
 }
