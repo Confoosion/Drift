@@ -16,7 +16,7 @@ let config = {
     },
     width: 2200,
     height: 960,
-    scene: [Load, Game, DriftTrack]
+    scene: [Load, StartMenu, Game, DriftTrack]
 }
 
 var cursors;
