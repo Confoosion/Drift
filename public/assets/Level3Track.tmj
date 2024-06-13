@@ -126,6 +126,18 @@
                  "width":222.198,
                  "x":2251.80534541163,
                  "y":1583.22712758573
+                }, 
+                {
+                 "gid":1327,
+                 "height":10,
+                 "id":47,
+                 "name":"checkpoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":222.198,
+                 "x":467.784000407664,
+                 "y":1591.00489196902
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -645,8 +657,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":37,
+ "nextlayerid":7,
+ "nextobjectid":48,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

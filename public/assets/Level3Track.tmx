@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="37">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="80" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="48">
  <editorsettings>
   <export target="Level3Track.tmj" format="json"/>
  </editorsettings>
@@ -480,6 +480,7 @@
   <object id="8" name="checkpoint" gid="1327" x="329.583" y="308.758" width="10" height="225.188"/>
   <object id="9" name="checkpoint" gid="1327" x="2219.07" y="306.676" width="10" height="225.188"/>
   <object id="10" name="checkpoint" gid="1327" x="2251.81" y="1583.23" width="222.198" height="10"/>
+  <object id="47" name="checkpoint" gid="1327" x="467.784" y="1591" width="222.198" height="10"/>
  </objectgroup>
  <layer id="3" name="backgroundLayer" width="80" height="60">
   <data encoding="csv">
