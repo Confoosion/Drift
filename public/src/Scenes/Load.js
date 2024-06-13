@@ -10,6 +10,8 @@ class Load extends Phaser.Scene {
         this.load.image("track_tiles", "spritesheet_tiles.png");
         this.load.tilemapTiledJSON("tutorial_track", "tutorialTrack.tmj");
         this.load.tilemapTiledJSON("track1", "level1Track.tmj");
+        this.load.tilemapTiledJSON("track2", "level2Track.tmj");
+        this.load.tilemapTiledJSON("track3", "level3Track.tmj");
 
         this.load.image("yellowCar", "car_yellow_1.png");
         this.load.image("blackCar", "car_black_1.png");
