@@ -4,6 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 var players = {};
+var rooms = {};
 
 let numOfPlayers = 0;
 
@@ -42,7 +43,21 @@ io.on('connection', (socket) => {
         players[socket.id].rotation = movementData.rotation;
 
         socket.broadcast.emit('playerMoved', players[socket.id]);
-    })
+    });
+
+    socket.on('createRoom', (numbers) => {
+
+        rooms[numbers.code] = {
+            code: numbers.code,
+            map: numbers.map,
+            playerNum: 1
+        };
+
+        socket.emit('gameInformationCorrect', rooms);
+
+        socket.join(numbers.code);
+        players[socket.id].playerNum = 1;
+    });
 });
 
 server.listen(8081, () => {

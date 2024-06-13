@@ -2,6 +2,8 @@ class StartMenu extends Phaser.Scene {
     constructor() {
         super("StartMenu");
         this.my = {background: {}};
+        this.mapNum = 0;
+        this.codeNum = "";
     }
 
     preload() {
@@ -10,6 +12,9 @@ class StartMenu extends Phaser.Scene {
     }
 
     create() {
+        this.socket = io();
+
+
         // background
         let my = this.my;
         my.background = this.add.image(600,500, "background");
@@ -26,14 +31,43 @@ class StartMenu extends Phaser.Scene {
         });
 
         // multiplayer 
-        const multiplayerText = this.add.text(900, 430, 'multiplayer', {
+        const multiplayerText = this.add.text(900, 430, 'Create Lobby', {
             fontSize: '45px',
             fill: '#ffffff',
             fontFamily: 'fantasy'
         }).setOrigin(0.5);
         multiplayerText.setInteractive();
         multiplayerText.on('pointerdown', () => {
+            this.mapNum = Math.round(Math.random() * 2 + 1);
+            console.log(this.mapNum);
+            this.codeNum = getCode(3);
+            console.log("Game code: " + this.codeNum);
             this.scene.start('DriftTrack');
+        });
+
+        const joinLobbyText = this.add.text(900, 470, 'Join Lobby', {
+            fontSize: '45px',
+            fill: '#ffffff',
+            fontFamily: 'fantasy'
+        }).setOrigin(0.5);
+        joinLobbyText.setInteractive();
+        joinLobbyText.on('pointerdown', () => {
+            let userInput = prompt("Enter game code:");
+
+            this.socket.on('gameInformationCorrect', (roomObj) => {
+
+                if(roomObj[userInput]){
+                    console.log("Hello");
+                }
+                console.log("Game code: " + userInput);
+                if(userInput === roomObj.code){
+                    console.log("Hello");
+                    this.scene.start('DriftTrack');
+                }
+                else{
+                    console.log("No game code found");
+                }
+            })
         });
 
         // tutorial?
@@ -48,4 +82,16 @@ class StartMenu extends Phaser.Scene {
         });
 
    }
+}
+
+function getCode(length)
+{
+    var result = '';
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for(var i=0; i < length; i++){
+        result += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return result;
 }

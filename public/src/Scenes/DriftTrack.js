@@ -19,7 +19,33 @@ class DriftTrack extends Phaser.Scene {
 
     create()
     {
-        this.map = this.add.tilemap("track1", this.TILESIZE, this.TILESIZE, this.TILEHEIGHT, this.TILEWIDTH);
+        this.socket = io();
+
+        let mapNumber = this.scene.get("StartMenu").mapNum;
+        let codeNumber = this.scene.get("StartMenu").codeNum;
+        this.map;
+        this.speedBoosts;
+
+        let theNumbers = {
+            map: mapNumber,
+            code: codeNumber
+        }
+
+        this.socket.emit('createRoom', theNumbers);
+
+        
+
+        if(mapNumber === 1){
+            this.map = this.add.tilemap("track1", this.TILESIZE, this.TILESIZE, this.TILEHEIGHT, this.TILEWIDTH);
+            
+        } else if(mapNumber === 2){
+            this.map = this.add.tilemap("track2", this.TILESIZE, this.TILESIZE, this.TILEHEIGHT, this.TILEWIDTH);
+            
+        } else if(mapNumber === 3){
+            this.map = this.add.tilemap("track3", this.TILESIZE, this.TILESIZE, this.TILEHEIGHT, this.TILEWIDTH);
+            
+        }
+        //this.map = this.add.tilemap("track1", this.TILESIZE, this.TILESIZE, this.TILEHEIGHT, this.TILEWIDTH);
 
         this.tileset = this.map.addTilesetImage("trackTileset", "track_tiles");
         this.wall = this.map.addTilesetImage("wallTileset", "track_tiles");
@@ -41,11 +67,33 @@ class DriftTrack extends Phaser.Scene {
 
         this.trackLayer = this.map.createLayer("trackLayer", this.tileset, 0, this.TILEHEIGHTOFFSET);
 
+        /*
         this.speedBoosts = this.map.createFromObjects("SpeedBoosts", {
             name: "speedBooster",
             key: "SpeedBoosts",
             frame: 252
         });
+        */
+        if(mapNumber === 1){
+            this.speedBoosts = this.map.createFromObjects("SpeedBoosts", {
+                name: "speedBooster",
+                key: "SpeedBoosts",
+                frame: 252
+            });
+        } else if(mapNumber === 2){
+            this.speedBoosts = this.map.createFromObjects("SpeedBoosts", {
+                name: "speedBooster",
+                key: "SpeedBoosts",
+                frame: 6
+            });
+        } else if(mapNumber === 3){
+            this.speedBoosts = this.map.createFromObjects("SpeedBoosts", {
+                name: "speedBooster",
+                key: "SpeedBoosts",
+                frame: 138
+            });
+        }
+
         this.physics.world.enable(this.speedBoosts, Phaser.Physics.Arcade.STATIC_BODY);
         this.speedBoostGroup = this.add.group(this.speedBoosts);
 
@@ -81,8 +129,53 @@ class DriftTrack extends Phaser.Scene {
             },
         }
 
+        let startingPosition2 = {
+            player1: {
+                x: 1498,
+                y: 1311
+            },
+            player2: {
+                x: 1948,
+                y: 1406
+            },
+            player3: {
+                x: 1370,
+                y: 1311
+            },
+            player4: {
+                x: 1370,
+                y: 1406
+            },
+            player5: {
+                x: 1240,
+                y: 1406
+            }
+        }
+
+        let startingPosition3 = {
+            player1: {
+                x: 1735,
+                y: 1663
+            },
+            player2: {
+                x: 1767,
+                y: 1760
+            },
+            player3: {
+                x: 1868,
+                y: 1663
+            },
+            player4: {
+                x: 1895,
+                y: 1760
+            },
+            player5: {
+                x: 1992,
+                y: 1663
+            }
+        }
+
         var self = this;
-        this.socket = io();
         this.otherPlayers = this.physics.add.group();
 
         
